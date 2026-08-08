@@ -1,1 +1,1 @@
-import 'util.js';
+import './util.js';

@@ -5,3 +5,15 @@ function getRandomInteger (min, max) {
   return randomInteger;
 }
 
+function getRandomValueArray (array) {
+  return array[getRandomInteger (0, array[length - 1])];
+}
+
+function getDataPhoto () {
+  let objectWithDataPhoto = {};
+  return function () {
+    objectWithDataPhoto = {
+
+    };
+  };
+}
