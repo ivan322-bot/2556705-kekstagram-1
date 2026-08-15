@@ -1,2 +1,2 @@
-import './mock.js';
+import './drawing-trumbnails.js';
 

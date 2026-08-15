@@ -24,7 +24,7 @@ function getDataPhoto () {
   };
 }
 
-const getArrayDataPhoto = Array.from({length: COUNT_PHOTOS}, getDataPhoto);
-console.log(getArrayDataPhoto);
+const getArrayDataPhotos = Array.from({length: COUNT_PHOTOS}, getDataPhoto);
+console.log(getArrayDataPhotos);
 
-export {getArrayDataPhoto};
+export {getArrayDataPhotos};
