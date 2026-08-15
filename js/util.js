@@ -1,6 +1,3 @@
-import './consts.js';
-import { DESCRIPTIONS_PHOTO, MAX_AVATAR, MAX_COMMENTS_ID, MAX_LIKES_PHOTO, MAX_PHOTO_ID, MAX_PHOTO_URL, MESSAGES_IN_COMMENTS, MIN_COMMENTS, MAX_COMMENTS, MIN_AVATAR, MIN_COMMETNS_ID, MIN_LIKES_PHOTO, MIN_PHOTO_ID, MIN_PHOTO_URL, NAMES, COUNT_PHOTOS} from './consts.js';
-
 function getRandomInteger (min, max) {
   const upper = Math.floor(Math.max(Math.abs(min), Math.abs(max)));
   const lower = Math.ceil(Math.min(Math.abs(min), Math.abs(max)));
@@ -27,30 +24,5 @@ function getUniqueInteger (min, max) {
   };
 }
 
-
-const getComments = () =>
-  function () {
-    return {
-      id: getUniqueInteger(MIN_COMMETNS_ID, MAX_COMMENTS_ID)(),
-      avatar: `img/avatar-${getRandomInteger(MIN_AVATAR, MAX_AVATAR)}.svg`,
-      message: getRandomValueArray(MESSAGES_IN_COMMENTS),
-      name: getRandomValueArray(NAMES)
-    };
-  };
-
-const getDataPhoto = () =>
-  function () {
-    return {
-      id: getUniqueInteger(MIN_PHOTO_ID, MAX_PHOTO_ID)(),
-      url: `photos/${getUniqueInteger(MIN_PHOTO_URL, MAX_PHOTO_URL)()}.jpg`,
-      description: getRandomValueArray(DESCRIPTIONS_PHOTO),
-      likes: getRandomInteger(MIN_LIKES_PHOTO, MAX_LIKES_PHOTO),
-      comments: Array.from({length: getRandomInteger(MIN_COMMENTS, MAX_COMMENTS)}, getComments())
-    };
-  };
-
-const getArrayDataPhoto = Array.from({length: COUNT_PHOTOS}, getDataPhoto());
-console.log(getArrayDataPhoto);
-
-export {getArrayDataPhoto};
+export {getRandomInteger, getRandomValueArray, getUniqueInteger};
 
