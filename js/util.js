@@ -24,5 +24,7 @@ function getUniqueInteger (min, max) {
   };
 }
 
-export {getRandomInteger, getRandomValueArray, getUniqueInteger};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey};
 
