@@ -19,7 +19,7 @@ getArrayDataPhotos.forEach((value)=> {
 });
 
 pictures.appendChild(photosFragment);
+export {pictures};
 
-console.log(photosFragment);
 
 
