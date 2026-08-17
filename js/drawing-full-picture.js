@@ -1,6 +1,6 @@
 import { getArrayDataPhotos } from './mock.js';
 import { pictures } from './drawing-trumbnails.js';
-import { openCommentsFullPicture } from './drawing-comments-full-picture.js';
+import { openCommentsFullPicture } from './drawing-comments.js';
 import { closeFullPictureClick, closeFullPictureEscape } from './close-full-picture.js';
 
 const buttonCloseFullPicture = document.querySelector('.big-picture__cancel');
@@ -19,6 +19,7 @@ function isChoosedTrumbnail (openedTrumbnail) {
 }
 
 function openFullPicture (evt) {
+  // console.clear();
   const picture = evt.target;
 
   if(isChoosedTrumbnail(picture)){

@@ -23,7 +23,6 @@ function closeFullPictureEscape (evt) {
     closeFullPicture();
     document.removeEventListener('keydown', closeFullPictureEscape);
     buttonCloseFullPicture.removeEventListener('click', closeFullPictureClick);
-
   }
 }
 

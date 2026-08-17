@@ -1,6 +1,8 @@
+import {showFirstComments} from './drawing-first-comments';
+
 const fullPictureCommentCount = document.querySelector('.social__comment-count');
-const fullPictureCommentsLoader = document.querySelector('.comments-loader');
 const fullPictureCommentsFragment = document.createDocumentFragment();
+const fullPictureComments = document.querySelector('.social__comments');
 
 function openCommentsFullPicture (openPicture) {
   openPicture.comments.forEach((value) => {
@@ -13,11 +15,8 @@ function openCommentsFullPicture (openPicture) {
     fullPictureCommentsFragment.appendChild(fullPictureSocialComment);
   });
 
-  const fullPictureComments = document.querySelector('.social__comments');
   fullPictureComments.innerHTML = '';
-  fullPictureComments.appendChild(fullPictureCommentsFragment);
-  fullPictureCommentCount.classList.add('hidden');
-  fullPictureCommentsLoader.classList.add('hidden');
+  showFirstComments(fullPictureCommentsFragment, fullPictureComments);
 }
 
 export {openCommentsFullPicture};
