@@ -24,7 +24,8 @@ function getUniqueInteger (min, max) {
   };
 }
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const isEscapeKey = (event) => event.key === 'Escape';
+const isEnterKey = (event) => event.key === 'Enter';
 
-export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey};
+export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey};
 
