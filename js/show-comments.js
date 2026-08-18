@@ -2,8 +2,24 @@ import { fullPictureCommentsFragment, fullPictureComments } from './drawing-comm
 
 const fullPictureCommentsLoader = document.querySelector('.comments-loader');
 const fullPictureCommentCount = document.querySelector('.social__comment-count');
+const btnUserComment = document.querySelector('.social__footer-btn');
 
-function addComments () {
+function addUserComment () {
+  const socialComent = document.querySelector('.social__comment').cloneNode(true);
+  const socialImg = socialComent.querySelector('.social__picture');
+  const socialText = socialComent.querySelector('.social__text');
+  const userImg = document.querySelector('.social__footer').querySelector('.social__picture');
+  const userMessage = document.querySelector('.social__footer-text');
+  socialImg.src = userImg.src;
+  socialImg.alt = userImg.alt;
+  socialText.textContent = userMessage.value;
+  fullPictureCommentsFragment.appendChild(socialComent);
+  fullPictureComments.appendChild(fullPictureCommentsFragment.children[fullPictureCommentsFragment.children.length - 1]);
+  fullPictureCommentCount.textContent = `${fullPictureComments.children.length} из ${fullPictureComments.children.length + fullPictureCommentsFragment.children.length} комментариев`;
+  userMessage.value = '';
+}
+
+function showMoreComments() {
   for (let i = 0; i < 5; i++) {
     console.log(fullPictureCommentsFragment.children.length);
     if (fullPictureCommentsFragment.children.length == 0) {
@@ -20,16 +36,17 @@ function addComments () {
   fullPictureCommentCount.textContent = `${fullPictureComments.children.length} из ${fullPictureComments.children.length + fullPictureCommentsFragment.children.length} комментариев`;
 }
 
-function showComments () {
-  addComments ();
-  fullPictureCommentsLoader.addEventListener('click', addComments);
+function showComments() {
+  showMoreComments();
+  btnUserComment.addEventListener('click', addUserComment);
+  fullPictureCommentsLoader.addEventListener('click', showMoreComments);
 }
 
-function clearComments () {
+function clearComments() {
   for (let j = fullPictureCommentsFragment.children.length - 1; j >= 0; j--) {
     fullPictureCommentsFragment.removeChild(fullPictureCommentsFragment.children[j]);
   }
-  fullPictureCommentsLoader.removeEventListener('click', addComments);
+  fullPictureCommentsLoader.removeEventListener('click', showMoreComments);
 }
 
-export {showComments, clearComments};
+export { showComments, clearComments };
