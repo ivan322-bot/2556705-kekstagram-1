@@ -1,7 +1,10 @@
 import {fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture} from './drawing-full-picture.js';
 import { isEscapeKey, isEnterKey } from './util.js';
+import { clearComments } from './show-comments.js';
+
 
 function closeFullPicture () {
+  clearComments();
   fullPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   pictures.addEventListener('click', openFullPicture);

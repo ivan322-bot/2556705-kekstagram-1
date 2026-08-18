@@ -1,6 +1,5 @@
-import {showFirstComments} from './drawing-first-comments';
+import {showComments} from './show-comments';
 
-const fullPictureCommentCount = document.querySelector('.social__comment-count');
 const fullPictureCommentsFragment = document.createDocumentFragment();
 const fullPictureComments = document.querySelector('.social__comments');
 
@@ -16,7 +15,7 @@ function openCommentsFullPicture (openPicture) {
   });
 
   fullPictureComments.innerHTML = '';
-  showFirstComments(fullPictureCommentsFragment, fullPictureComments);
+  showComments();
 }
 
-export {openCommentsFullPicture};
+export {openCommentsFullPicture, fullPictureCommentsFragment, fullPictureComments};
