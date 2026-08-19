@@ -12,6 +12,18 @@ const fullPictureLikes = document.querySelector('.likes-count');
 const fullPictureShownComments = document.querySelector('.social__comment-shown-count');
 const fullPictureTotalComments = document.querySelector('.social__comment-total-count');
 
+// const styles = window.getComputedStyle(fullPictureLikes, ':before');
+// // let cssText = styles.cssText;
+// // if (!cssText) {
+// //   cssText = Array.from(styles).reduce((str, property) => {
+// //     return `${str}${property}:${styles.getPropertyValue(property)};`;
+// //   }, '');
+// // }
+
+// // const content = styles['font-size'];
+// // console.log(content);
+// console.log(cssText);
+
 function isChoosedTrumbnail (openedTrumbnail) {
   if (openedTrumbnail.matches('.img-upload__label') || openedTrumbnail.matches('.img-upload__input') || openedTrumbnail.matches('.img-upload__start')) {
     return true;
