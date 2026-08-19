@@ -3,13 +3,36 @@ import { fullPictureCommentsFragment, fullPictureComments } from './drawing-comm
 const fullPictureCommentsLoader = document.querySelector('.comments-loader');
 const fullPictureCommentCount = document.querySelector('.social__comment-count');
 const btnUserComment = document.querySelector('.social__footer-btn');
+const userImg = document.querySelector('.social__footer').querySelector('.social__picture');
+const userMessage = document.querySelector('.social__footer-text');
+
+function repairUserComment () {
+  userMessage.style.paddingRight = '38px';
+}
+
+// const pristine = new Pristine(document.querySelector('.img-upload__form'));
+// function checkUserComment () {
+//   if (userMessage.value >= 10) {
+//     return false;
+//   }
+// }
+
+// pristine.addValidator(document.querySelector('img-upload__input'), checkUserComment, 'Ошибка');
+
+// function isValidUserComment () {
+//   const valid = pristine.validate(); // returns true or false
+//   return valid;
+// }
+
+// console.log(isValidUserComment());
 
 function addUserComment () {
   const socialComent = document.querySelector('.social__comment').cloneNode(true);
   const socialImg = socialComent.querySelector('.social__picture');
   const socialText = socialComent.querySelector('.social__text');
-  const userImg = document.querySelector('.social__footer').querySelector('.social__picture');
-  const userMessage = document.querySelector('.social__footer-text');
+  socialText.style.maxWidth = '520px';
+  socialText.style.overflow = 'hidden';
+
   socialImg.src = userImg.src;
   socialImg.alt = userImg.alt;
   socialText.textContent = userMessage.value;
@@ -37,6 +60,7 @@ function showMoreComments() {
 }
 
 function showComments() {
+  repairUserComment();
   showMoreComments();
   btnUserComment.addEventListener('click', addUserComment);
   fullPictureCommentsLoader.addEventListener('click', showMoreComments);
