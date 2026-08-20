@@ -1,5 +1,5 @@
 import { getArrayDataPhotos } from './mock.js';
-import { pictures } from './drawing-trumbnails.js';
+import { pictures } from './render-trumbnails.js';
 import { openCommentsFullPicture } from './drawing-comments.js';
 import { closeFullPictureClick, closeFullPictureEscape } from './close-full-picture.js';
 import {checkUserLike} from './add-user-like.js';
@@ -13,33 +13,8 @@ const fullPictureLikes = document.querySelector('.likes-count');
 const fullPictureShownComments = document.querySelector('.social__comment-shown-count');
 const fullPictureTotalComments = document.querySelector('.social__comment-total-count');
 
-// function addLike () {
-// const styles = window.getComputedStyle(fullPictureLikes, ':before');
-// const heartImgSrc = styles['background-image'];
-//   fullPictureLikes.style.backgroundImage = heartImgSrc;
-//   fullPictureLikes.style.backgroundSize = '92%';
-//   fullPictureLikes.style.backgroundPosition = '-1px -89px';
-//   fullPictureLikes.style.backgroundRepeat = 'no-repeat';
-// }
 
-// function removeLike () {
-//   fullPictureLikes.style.backgroundImage = '';
-//   fullPictureLikes.style.backgroundSize = '';
-//   fullPictureLikes.style.backgroundPosition = '';
-//   fullPictureLikes.style.backgroundRepeat = '';
-// }
-
-// function checkUserLike () {
-//   if (!fullPictureLikes.matches('.likes-count--liked')) {
-//     addLike();
-//     fullPictureLikes.classList.add('likes-count--liked');
-//   } else {
-//     removeLike();
-//     fullPictureLikes.classList.remove('likes-count--liked');
-//   }
-// }
-
-// fullPictureLikes.addEventListener('click', checkUserLike);
+fullPictureLikes.style.fontSize = '11px';
 
 function isChoosedTrumbnail (openedTrumbnail) {
   if (openedTrumbnail.matches('.img-upload__label') || openedTrumbnail.matches('.img-upload__input') || openedTrumbnail.matches('.img-upload__start')) {
@@ -48,13 +23,10 @@ function isChoosedTrumbnail (openedTrumbnail) {
 }
 
 function openFullPicture (evt) {
-  // console.clear();
   const picture = evt.target;
-
-  if(isChoosedTrumbnail(picture)){
+  if (isChoosedTrumbnail(picture)) {
     return null;
   }
-
   let currentPicture;
   getArrayDataPhotos.forEach((value) => {
     if (picture.src.includes(value.url)) {
@@ -62,7 +34,6 @@ function openFullPicture (evt) {
       return value;
     }
   });
-
   fullPictureImg.src = picture.src;
   fullPictureDescription.textContent = currentPicture.description;
   fullPictureLikes.textContent = currentPicture.likes;

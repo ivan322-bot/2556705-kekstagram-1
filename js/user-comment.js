@@ -4,7 +4,7 @@ const userImg = document.querySelector('.social__footer').querySelector('.social
 const userMessage = document.querySelector('.social__footer-text');
 
 function repairUserComment () {
-  userMessage.style.paddingRight = '38px';
+  userMessage.style.paddingRight = '38px'; // Чтобы написанный пользователем текст не забеагл на кнопку отправки сообщения
 }
 
 function addUserComment () {

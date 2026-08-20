@@ -8,7 +8,6 @@ const templapePictureImg = templapePicture.querySelector('.picture__img');
 const templapePictureComments = templapePicture.querySelector('.picture__comments');
 const templapePictureLikes = templapePicture.querySelector('.picture__likes');
 
-
 getArrayDataPhotos.forEach((value)=> {
   templapePictureImg.src = value.url;
   templapePictureImg.alt = value.description;
@@ -20,6 +19,3 @@ getArrayDataPhotos.forEach((value)=> {
 
 pictures.appendChild(photosFragment);
 export {pictures};
-
-
-

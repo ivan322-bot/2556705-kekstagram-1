@@ -1,22 +1,22 @@
-import {fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture} from './drawing-full-picture.js';
+import { fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture } from './render-full-picture.js';
 import { isEscapeKey, isEnterKey } from './util.js';
 import { clearComments } from './show-comments.js';
 
 
-function closeFullPicture () {
+function closeFullPicture() {
   clearComments();
   fullPicture.classList.add('hidden');
   body.classList.remove('modal-open');
   pictures.addEventListener('click', openFullPicture);
 }
 
-function closeFullPictureClick () {
+function closeFullPictureClick() {
   closeFullPicture();
   buttonCloseFullPicture.removeEventListener('click', closeFullPictureClick);
   document.removeEventListener('keydown', closeFullPictureEscape);
 }
 
-function closeFullPictureEscape (evt) {
+function closeFullPictureEscape(evt) {
   if (isEnterKey(evt)) {
     evt.preventDefault();
     return null;
@@ -29,4 +29,4 @@ function closeFullPictureEscape (evt) {
   }
 }
 
-export {closeFullPictureClick, closeFullPictureEscape};
+export { closeFullPictureClick, closeFullPictureEscape };
