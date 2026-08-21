@@ -1,4 +1,5 @@
 import { fullPictureLikes } from './render-full-picture.js';
+import { isFourDigitalNumber, changeFourDigitalNumber } from './util.js';
 
 const socialLikes = document.querySelector('.social__likes');
 
@@ -7,13 +8,19 @@ let likesCountNumber;
 function addLikeCount () {
   addLikeImg();
   fullPictureLikes.classList.add('likes-count--liked');
+  if(Number.isNaN(Number(fullPictureLikes.textContent))) {
+    console.log('Это не число');
+  }
   if (likesCountNumber >= 1) {
+    console.log('Счетчик лайков уже был активирован');
+    console.log(likesCountNumber);
+    console.log(document.querySelector('.likes-count').textContent);
     fullPictureLikes.textContent = likesCountNumber;
   }
   fullPictureLikes.textContent++;
-  if (fullPictureLikes.textContent >= 1000 && fullPictureLikes.textContent < 10000) {
-    likesCountNumber = fullPictureLikes.textContent;
-    fullPictureLikes.textContent = `${fullPictureLikes.textContent[0]},${fullPictureLikes.textContent[1]}K`;
+  likesCountNumber = fullPictureLikes.textContent;
+  if (isFourDigitalNumber(fullPictureLikes.textContent)) {
+    fullPictureLikes.textContent = changeFourDigitalNumber(fullPictureLikes.textContent);
   }
   return likesCountNumber;
 }
@@ -23,9 +30,9 @@ function removeLikeCount () {
   fullPictureLikes.classList.remove('likes-count--liked');
   fullPictureLikes.textContent = likesCountNumber;
   fullPictureLikes.textContent--;
-  if (fullPictureLikes.textContent >= 1000 && fullPictureLikes.textContent < 10000) {
-    likesCountNumber = fullPictureLikes.textContent;
-    fullPictureLikes.textContent = `${fullPictureLikes.textContent[0]},${fullPictureLikes.textContent[1]}K`;
+  likesCountNumber = fullPictureLikes.textContent;
+  if (isFourDigitalNumber(fullPictureLikes.textContent)) {
+    fullPictureLikes.textContent = changeFourDigitalNumber(fullPictureLikes.textContent);
   }
   return likesCountNumber;
 }
@@ -52,22 +59,29 @@ function addLikeImg() {
 }
 
 function checkUserLike() {
-  let likesCountNumberTwo;
+  let likesCountTextContent;
+  // console.log(document.querySelector('.likes-count').textContent);
   if (!fullPictureLikes.matches('.likes-count--liked')) {
-    if(likesCountNumberTwo > 1) {
-      likesCountNumberTwo++;
-      fullPictureLikes.textContent = likesCountNumberTwo;
+    if(document.querySelector('.likes-count').textContent == likesCountTextContent) {
+      if(likesCountTextContent > 1) {
+        likesCountTextContent++;
+        fullPictureLikes.textContent = likesCountTextContent;
+      }
+      likesCountTextContent = addLikeCount();
+      console.log('Добавляем лайк');
+      console.log(likesCountTextContent);
+    } else {
+      console.log('Добавляем лайк. Лайк добавлен первый раз');
+      likesCountTextContent = addLikeCount();
+      console.log(likesCountTextContent);
     }
-    likesCountNumberTwo = addLikeCount();
-    console.log('Добавляем лайк');
   }
   else {
-    fullPictureLikes.textContent = likesCountNumberTwo;
-    likesCountNumberTwo = removeLikeCount();
+    fullPictureLikes.textContent = likesCountTextContent;
+    likesCountTextContent = removeLikeCount();
     console.log('Убираем лайк');
+    console.log(likesCountTextContent);
   }
-  console.log(likesCountNumberTwo);
-  // likesCountNumberTwo++;
 }
 
 export { checkUserLike };

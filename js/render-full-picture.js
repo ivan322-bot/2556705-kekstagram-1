@@ -43,12 +43,12 @@ function openFullPicture (evt) {
   openCommentsFullPicture(currentPicture);
   fullPicture.classList.remove('hidden');
   body.classList.add('modal-open');
+  fullPictureLikes.addEventListener('click', checkUserLike);
   document.addEventListener('keydown', closeFullPictureEscape);
   buttonCloseFullPicture.addEventListener('click', closeFullPictureClick);
   pictures.removeEventListener('click', openFullPicture);
 }
 
 pictures.addEventListener('click', openFullPicture);
-fullPictureLikes.addEventListener('click', checkUserLike);
 export {fullPicture, body, fullPictureLikes, pictures, buttonCloseFullPicture, openFullPicture, };
 

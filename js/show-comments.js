@@ -1,5 +1,6 @@
 import { fullPictureCommentsFragment, fullPictureComments } from './drawing-comments.js';
 import { repairUserComment, addUserComment } from './user-comment.js';
+import {fullPictureLikes} from './render-full-picture.js';
 const fullPictureCommentsLoader = document.querySelector('.comments-loader');
 const fullPictureCommentCount = document.querySelector('.social__comment-count');
 const btnUserComment = document.querySelector('.social__footer-btn');
@@ -33,6 +34,7 @@ function clearComments() {
     fullPictureCommentsFragment.removeChild(fullPictureCommentsFragment.children[j]);
   }
   fullPictureCommentsLoader.removeEventListener('click', showMoreComments);
+  fullPictureLikes.innerHTML = '';
 }
 
 export { fullPictureCommentCount, showComments, clearComments };

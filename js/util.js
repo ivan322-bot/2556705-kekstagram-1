@@ -27,5 +27,13 @@ function getUniqueInteger (min, max) {
 const isEscapeKey = (event) => event.key === 'Escape';
 const isEnterKey = (event) => event.key === 'Enter';
 
-export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey};
+function isFourDigitalNumber (number) {
+  return number >= 1000 && number < 10000;
+}
+
+function changeFourDigitalNumber (numbers) {
+  return `${numbers[0]},${numbers[1]}K`;
+}
+
+export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey, isFourDigitalNumber, changeFourDigitalNumber};
 
