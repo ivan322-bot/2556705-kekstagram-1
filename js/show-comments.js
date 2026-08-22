@@ -35,6 +35,7 @@ function clearComments() {
   }
   fullPictureCommentsLoader.removeEventListener('click', showMoreComments);
   fullPictureLikes.innerHTML = '';
+  // Убираем активированный лайк
 }
 
 export { fullPictureCommentCount, showComments, clearComments };

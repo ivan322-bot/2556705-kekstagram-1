@@ -1,47 +1,43 @@
+// Импортируем эл-нт с одбщим счетчиком лайков
 import { fullPictureLikes } from './render-full-picture.js';
-import { isFourDigitalNumber, changeFourDigitalNumber } from './util.js';
+import { changeMultiDigitalNumber, isNumber } from './util.js';
 
 const socialLikes = document.querySelector('.social__likes');
 
 let likesCountNumber;
-
+// Добавляем лайк поставленныый пользователем и увеличиваем обдщий счетчик лайков
 function addLikeCount () {
   addLikeImg();
   fullPictureLikes.classList.add('likes-count--liked');
-  if(Number.isNaN(Number(fullPictureLikes.textContent))) {
-    console.log('Это не число');
+  if(isNumber(fullPictureLikes) && likesCountNumber >= 1) {
+    likesCountNumber = 0;
   }
   if (likesCountNumber >= 1) {
-    console.log('Счетчик лайков уже был активирован');
-    console.log(likesCountNumber);
-    console.log(document.querySelector('.likes-count').textContent);
     fullPictureLikes.textContent = likesCountNumber;
   }
   fullPictureLikes.textContent++;
   likesCountNumber = fullPictureLikes.textContent;
-  if (isFourDigitalNumber(fullPictureLikes.textContent)) {
-    fullPictureLikes.textContent = changeFourDigitalNumber(fullPictureLikes.textContent);
-  }
+  fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
   return likesCountNumber;
 }
-
+// Удаляем лайк поставленныый пользователем и уменьшаем обдщий счетчик лайков
 function removeLikeCount () {
   socialLikes.removeChild(document.querySelector('.user-like'));
   fullPictureLikes.classList.remove('likes-count--liked');
   fullPictureLikes.textContent = likesCountNumber;
   fullPictureLikes.textContent--;
   likesCountNumber = fullPictureLikes.textContent;
-  if (isFourDigitalNumber(fullPictureLikes.textContent)) {
-    fullPictureLikes.textContent = changeFourDigitalNumber(fullPictureLikes.textContent);
-  }
+  fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
   return likesCountNumber;
 }
 
+// Показываем изображение сердечка при добавлении лайка от пользователя
 function addLikeImg() {
   socialLikes.style.position = 'relative';
   fullPictureLikes.style.zIndex = '2';
   const styles = window.getComputedStyle(fullPictureLikes, ':before');
   const heartImgSrc = styles['background-image'];
+  // Создаем эл-нт куда поместим img сердечка
   const userLike = document.createElement('SPAN');
   userLike.classList.add('user-like');
   userLike.style.position = 'absolute';
@@ -54,35 +50,34 @@ function addLikeImg() {
   userLike.style.backgroundRepeat = 'no-repeat';
   userLike.style.height = '18px';
   userLike.style.width = '20px';
+  // Добаляем сердечко в разметку и возвращаем эл-нт с сердечком
   socialLikes.appendChild(userLike);
   return userLike;
 }
-
+// Добавляет, либо удаляет лайк от пользователя
 function checkUserLike() {
   let likesCountTextContent;
-  // console.log(document.querySelector('.likes-count').textContent);
+  // Условие (Если лайк отсутствует) {Добаляем лайк}
   if (!fullPictureLikes.matches('.likes-count--liked')) {
-    if(document.querySelector('.likes-count').textContent == likesCountTextContent) {
-      if(likesCountTextContent > 1) {
-        likesCountTextContent++;
-        fullPictureLikes.textContent = likesCountTextContent;
-      }
-      likesCountTextContent = addLikeCount();
-      console.log('Добавляем лайк');
-      console.log(likesCountTextContent);
-    } else {
-      console.log('Добавляем лайк. Лайк добавлен первый раз');
-      likesCountTextContent = addLikeCount();
-      console.log(likesCountTextContent);
-    }
-  }
-  else {
+    console.log('Добавляем лайк');
+    likesCountTextContent = addLikeCount();
+    console.log(likesCountTextContent);
+  } else {
+    // Условие (Если лайк присутствует) {Удаляем лайк}
     fullPictureLikes.textContent = likesCountTextContent;
     likesCountTextContent = removeLikeCount();
     console.log('Убираем лайк');
     console.log(likesCountTextContent);
   }
 }
+// Удаляет изображение сердечка
+function clearUserLike () {
+  if(fullPictureLikes.matches('.likes-count--liked')){
+    console.log('Убираем активированный лайк');
+    fullPictureLikes.classList.remove('likes-count--liked');
+    document.querySelector('.social__likes').removeChild(document.querySelector('.user-like'));
+  }
+}
 
-export { checkUserLike };
+export { checkUserLike, clearUserLike };
 
