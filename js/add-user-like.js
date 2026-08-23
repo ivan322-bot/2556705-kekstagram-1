@@ -1,6 +1,6 @@
 // Импортируем эл-нт с одбщим счетчиком лайков
-import { fullPictureLikes } from './render-full-picture.js';
-import { changeMultiDigitalNumber, isNumber } from './util.js';
+import { fullPictureLikes, getChoosedTrumbnail } from './render-full-picture.js';
+import { changeMultiDigitalNumber } from './util.js';
 
 const socialLikes = document.querySelector('.social__likes');
 
@@ -9,12 +9,7 @@ let likesCountNumber;
 function addLikeCount () {
   addLikeImg();
   fullPictureLikes.classList.add('likes-count--liked');
-  if(isNumber(fullPictureLikes) && likesCountNumber >= 1) {
-    likesCountNumber = 0;
-  }
-  if (likesCountNumber >= 1) {
-    fullPictureLikes.textContent = likesCountNumber;
-  }
+  fullPictureLikes.textContent = getChoosedTrumbnail().id;
   fullPictureLikes.textContent++;
   likesCountNumber = fullPictureLikes.textContent;
   fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
@@ -24,9 +19,9 @@ function addLikeCount () {
 function removeLikeCount () {
   socialLikes.removeChild(document.querySelector('.user-like'));
   fullPictureLikes.classList.remove('likes-count--liked');
-  fullPictureLikes.textContent = likesCountNumber;
-  fullPictureLikes.textContent--;
+  fullPictureLikes.textContent = getChoosedTrumbnail().id;
   likesCountNumber = fullPictureLikes.textContent;
+  fullPictureLikes.textContent--;
   fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
   return likesCountNumber;
 }
@@ -44,7 +39,7 @@ function addLikeImg() {
   userLike.style.zIndex = '1';
   userLike.style.content = '';
   userLike.style.top = '5px';
-  userLike.style.right = '31.5px';
+  userLike.style.right = '46.5px';
   userLike.style.backgroundImage = heartImgSrc;
   userLike.style.backgroundPosition = '-5px -81px';
   userLike.style.backgroundRepeat = 'no-repeat';
@@ -74,10 +69,13 @@ function checkUserLike() {
 function clearUserLike () {
   if(fullPictureLikes.matches('.likes-count--liked')){
     console.log('Убираем активированный лайк');
+    getChoosedTrumbnail().dataset.hasUserLike = 'yes';
     fullPictureLikes.classList.remove('likes-count--liked');
     document.querySelector('.social__likes').removeChild(document.querySelector('.user-like'));
+  } else {
+    getChoosedTrumbnail().dataset.hasUserLike = 'no';
   }
 }
 
-export { checkUserLike, clearUserLike };
+export { checkUserLike, clearUserLike, addLikeImg };
 

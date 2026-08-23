@@ -2,7 +2,8 @@ import { getArrayDataPhotos } from './mock.js';
 import { pictures } from './render-trumbnails.js';
 import { openCommentsFullPicture } from './drawing-comments.js';
 import { closeFullPictureClick, closeFullPictureEscape } from './close-full-picture.js';
-import {checkUserLike} from './add-user-like.js';
+import {checkUserLike, addLikeImg} from './add-user-like.js';
+import {changeMultiDigitalNumber} from './util.js';
 
 const buttonCloseFullPicture = document.querySelector('.big-picture__cancel');
 const body = document.body;
@@ -13,13 +14,22 @@ const fullPictureLikes = document.querySelector('.likes-count');
 const fullPictureShownComments = document.querySelector('.social__comment-shown-count');
 const fullPictureTotalComments = document.querySelector('.social__comment-total-count');
 
-
-fullPictureLikes.style.fontSize = '11px';
+document.querySelector('.social__likes').style.fontSize = '11px';
 
 function isChoosedTrumbnail (openedTrumbnail) {
   if (openedTrumbnail.matches('.img-upload__label') || openedTrumbnail.matches('.img-upload__input') || openedTrumbnail.matches('.img-upload__start')) {
     return true;
   }
+}
+
+function getChoosedTrumbnail () {
+  let choosedTrumbnail;
+  document.querySelector('.pictures').querySelectorAll('.picture__img').forEach((value) => {
+    if(fullPictureImg.src.includes(value.src)) {
+      choosedTrumbnail = value;
+    }
+  });
+  return choosedTrumbnail;
 }
 
 function openFullPicture (evt) {
@@ -40,6 +50,15 @@ function openFullPicture (evt) {
   fullPictureTotalComments.textContent = currentPicture.comments.length;
   fullPictureShownComments.textContent = currentPicture.comments.length;
 
+  if (getChoosedTrumbnail().dataset.hasUserLike == 'yes') {
+    addLikeImg();
+    fullPictureLikes.classList.add('likes-count--liked');
+    fullPictureLikes.textContent++;
+  }
+
+  getChoosedTrumbnail().id = fullPictureLikes.textContent;
+  fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
+
   openCommentsFullPicture(currentPicture);
   fullPicture.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -50,5 +69,5 @@ function openFullPicture (evt) {
 }
 
 pictures.addEventListener('click', openFullPicture);
-export {fullPicture, body, fullPictureLikes, pictures, buttonCloseFullPicture, openFullPicture, };
+export {fullPicture, body, fullPictureLikes, pictures, buttonCloseFullPicture, openFullPicture, getChoosedTrumbnail};
 

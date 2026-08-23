@@ -7,7 +7,6 @@ const btnUserComment = document.querySelector('.social__footer-btn');
 
 function showMoreComments() {
   for (let i = 0; i < 5; i++) {
-    console.log(fullPictureCommentsFragment.children.length);
     if (fullPictureCommentsFragment.children.length == 0) {
       break;
     }
