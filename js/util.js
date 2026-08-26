@@ -5,10 +5,12 @@ function getRandomInteger (min, max) {
   const randomInteger = Math.floor(Math.random() * (upper - lower + 1) + lower);
   return randomInteger;
 }
+
 // Получаем рандомный элемент массива и выводим его значение
 function getRandomValueArray (valuesArray) {
   return valuesArray[getRandomInteger(0, valuesArray.length - 1)];
 }
+
 // Получаем уникальное число
 function getUniqueInteger (min, max) {
   const previosValues = [];
@@ -28,20 +30,22 @@ function getUniqueInteger (min, max) {
 const isEscapeKey = (event) => event.key === 'Escape';
 const isEnterKey = (event) => event.key === 'Enter';
 
-function changeMultiDigitalNumber (likesCount) {
-  switch (likesCount.length) {
-    case 4: return `${likesCount[0]},${likesCount[1]}K`;
-    case 5: return `${likesCount[0]}${likesCount[1]},${likesCount[2]}K`;
-    case 6: return `${likesCount[0]}${likesCount[1]}${likesCount[2]}K`;
-    case 7: return `${likesCount[0]},${likesCount[1]}М`;
-    case 8: return `${likesCount[0]}${likesCount[1]},${likesCount[2]}М`;
-    case 9: return `${likesCount[0]}${likesCount[1]}${likesCount[2]}М`;
+// Заменяем число текстом, напр. 4200 -> 4,2К
+function changeMultiDigitalNumber (number) {
+  switch (number.length) {
+    case 4: return `${number[0]},${number[1]}K`;
+    case 5: return `${number[0]}${number[1]},${number[2]}K`;
+    case 6: return `${number[0]}${number[1]}${number[2]}K`;
+    case 7: return `${number[0]},${number[1]}М`;
+    case 8: return `${number[0]}${number[1]},${number[2]}М`;
+    case 9: return `${number[0]}${number[1]}${number[2]}М`;
   }
 }
 
-function isNumber (likesCount) {
-  return Number.isNaN(Number(likesCount.textContent)) == false;
+// Является ли текстовое соджерное эл-та числом
+function isNumber (element) {
+  return Number.isNaN(Number(element.textContent)) == false;
 }
 
-export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey, changeMultiDigitalNumber, isNumber};
+export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey, changeMultiDigitalNumber};
 

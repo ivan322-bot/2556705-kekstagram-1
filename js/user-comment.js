@@ -1,10 +1,12 @@
 import { fullPictureCommentsFragment, fullPictureComments } from './drawing-comments.js';
 import { fullPictureCommentCount } from './show-comments.js';
+
 const userImg = document.querySelector('.social__footer').querySelector('.social__picture');
 const userMessage = document.querySelector('.social__footer-text');
 
+// Чтобы написанный пользователем текст не забеагл на кнопку отправки сообщения
 function repairUserComment () {
-  userMessage.style.paddingRight = '38px'; // Чтобы написанный пользователем текст не забеагл на кнопку отправки сообщения
+  userMessage.style.paddingRight = '38px';
 }
 
 function addUserComment () {
@@ -13,7 +15,6 @@ function addUserComment () {
   const socialText = socialComent.querySelector('.social__text');
   socialText.style.maxWidth = '520px';
   socialText.style.overflow = 'hidden';
-
   socialImg.src = userImg.src;
   socialImg.alt = userImg.alt;
   socialText.textContent = userMessage.value;

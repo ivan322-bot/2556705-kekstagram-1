@@ -1,9 +1,11 @@
-import {showComments} from './show-comments';
+import { renderComments, repairUserComment, btnUserComment, fullPictureCommentsLoader } from './show-comments';
+import {addUserComment} from './user-comment';
 
 const fullPictureCommentsFragment = document.createDocumentFragment();
 const fullPictureComments = document.querySelector('.social__comments');
 
-function openCommentsFullPicture (openPicture) {
+// Корневая/главная функция для отрисовки комментариев у fullPicture
+function openCommentsFullPicture(openPicture) {
   openPicture.comments.forEach((value) => {
     const fullPictureSocialComment = document.querySelector('.social__comment').cloneNode(true);
     const fullPictureCommentPicture = fullPictureSocialComment.querySelector('.social__picture');
@@ -15,7 +17,10 @@ function openCommentsFullPicture (openPicture) {
   });
 
   fullPictureComments.innerHTML = '';
-  showComments();
+  repairUserComment();
+  renderComments();
+  btnUserComment.addEventListener('click', addUserComment);
+  fullPictureCommentsLoader.addEventListener('click', renderComments);
 }
 
-export {openCommentsFullPicture, fullPictureCommentsFragment, fullPictureComments};
+export { openCommentsFullPicture, fullPictureCommentsFragment, fullPictureComments };

@@ -3,25 +3,28 @@ import { fullPictureLikes, getChoosedTrumbnail } from './render-full-picture.js'
 import { changeMultiDigitalNumber } from './util.js';
 
 const socialLikes = document.querySelector('.social__likes');
-
 let likesCountNumber;
-// Добавляем лайк поставленныый пользователем и увеличиваем обдщий счетчик лайков
-function addLikeCount () {
+
+// Добавляем img лайка поставленного пользователем и увеличиваем обдщий счетчик лайков
+function addLikeCount() {
   addLikeImg();
   fullPictureLikes.classList.add('likes-count--liked');
   fullPictureLikes.textContent = getChoosedTrumbnail().id;
   fullPictureLikes.textContent++;
   likesCountNumber = fullPictureLikes.textContent;
+  // Превращается число лайков в текстовый вид (Напр. 4,2 К)
   fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
   return likesCountNumber;
 }
-// Удаляем лайк поставленныый пользователем и уменьшаем обдщий счетчик лайков
-function removeLikeCount () {
+
+// Удаляем img лайка поставленного пользователем и уменьшаем обдщий счетчик лайков
+function removeLikeCount() {
   socialLikes.removeChild(document.querySelector('.user-like'));
   fullPictureLikes.classList.remove('likes-count--liked');
   fullPictureLikes.textContent = getChoosedTrumbnail().id;
   likesCountNumber = fullPictureLikes.textContent;
   fullPictureLikes.textContent--;
+  // Превращается число лайков в текстовый вид (Напр. 4,2 К)
   fullPictureLikes.textContent = changeMultiDigitalNumber(fullPictureLikes.textContent);
   return likesCountNumber;
 }
@@ -49,8 +52,9 @@ function addLikeImg() {
   socialLikes.appendChild(userLike);
   return userLike;
 }
+
 // Добавляет, либо удаляет лайк от пользователя
-function checkUserLike() {
+function changeUserLike() {
   let likesCountTextContent;
   // Условие (Если лайк отсутствует) {Добаляем лайк}
   if (!fullPictureLikes.matches('.likes-count--liked')) {
@@ -65,9 +69,10 @@ function checkUserLike() {
     console.log(likesCountTextContent);
   }
 }
+
 // Удаляет изображение сердечка
-function clearUserLike () {
-  if(fullPictureLikes.matches('.likes-count--liked')){
+function clearUserLike() {
+  if (fullPictureLikes.matches('.likes-count--liked')) {
     console.log('Убираем активированный лайк');
     getChoosedTrumbnail().dataset.hasUserLike = 'yes';
     fullPictureLikes.classList.remove('likes-count--liked');
@@ -77,5 +82,5 @@ function clearUserLike () {
   }
 }
 
-export { checkUserLike, clearUserLike, addLikeImg };
+export { changeUserLike, clearUserLike, addLikeImg };
 
