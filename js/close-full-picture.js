@@ -18,12 +18,7 @@ function closeFullPictureClick() {
 }
 
 function closeFullPictureEscape(evt) {
-  // if (isEnterKey(evt)) {
-  //   evt.preventDefault();
-  //   return null;
-  // }
   if (isEscapeKey(evt)) {
-    // evt.preventDefault();
     closeFullPicture();
     document.removeEventListener('keydown', closeFullPictureEscape);
     buttonCloseFullPicture.removeEventListener('click', closeFullPictureClick);

@@ -45,7 +45,7 @@ function isChoosedTrumbnail (openedTrumbnail) {
 
 function openFullPicture(evt) {
   const picture = evt.target;
-  console.log('Выбрана миниатюра');
+  // console.log('Выбрана миниатюра'); // ! Срабатывает  обработчик
   if(isChoosedTrumbnail(picture)) {
     return null;
   }
@@ -86,8 +86,10 @@ function openFullPicture(evt) {
   buttonCloseFullPicture.addEventListener('click', closeFullPictureClick);
   pictures.removeEventListener('click', openFullPicture);
 }
+
 if(document.querySelector('.img-upload__overlay').matches('.hidden')) {
   pictures.addEventListener('click', openFullPicture);
 }
+
 export { fullPicture, body, fullPictureLikes, pictures, buttonCloseFullPicture, openFullPicture, getChoosedTrumbnail };
 
