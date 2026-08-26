@@ -9,7 +9,8 @@ const pristine = new Pristine(userForm, {
   errorTextClass: 'img-upload__field-wrapper--error',
 });
 
-function getHashtags () {
+// Получаем обработанный Хештег в нижнем регистре
+function getHashtags() {
   const rawHashtags = String(hashtagsInput.value).split(' ');
   const hashtags = [];
   rawHashtags.forEach(value => {
@@ -21,25 +22,29 @@ function getHashtags () {
   return hashtags;
 }
 
+// Проверям длину Хештега
 function checkLengthHashtags() {
   const hashtags = getHashtags();
   const isRightLengthHashtag = hashtags.every(value => (value.length <= 20) ? true : false)
   return isRightLengthHashtag;
 }
 
+// Проверям имеет ли Хештег знак # в начале
 function isReallyHashtag() {
   const hashtags = getHashtags();
   const isHashtag = hashtags.every(value => (value.startsWith('#')) ? true : false);
   return isHashtag;
 }
 
-function hasOneSymbolHastag () {
+// Проверям состоим ли Хештег из одной #
+function hasOneSymbolHastag() {
   const hashtags = getHashtags();
   const isOneSymbol = hashtags.every(value => (value.startsWith('#') && value.endsWith('#')) ? false : true);
   return isOneSymbol;
 }
 
-function isRepeatHashtag () {
+// Проверям имеются ли повторяющиеся Хештеги
+function isRepeatHashtag() {
   const hashtags = getHashtags();
   const newArrayHashtags = [];
   const hasRepeatHashtag = hashtags.every(value => {
@@ -53,18 +58,18 @@ function isRepeatHashtag () {
   return hasRepeatHashtag;
 }
 
-function checkCountHashtags () {
+// Проверям количество Хештегов
+function checkCountHashtags() {
   const hashtags = getHashtags();
   return hashtags.length <= 5;
 }
 
-function checkSymbolsHashtags () {
+// Проверям имеют ли Хештеги спецсимволы
+function checkSymbolsHashtags() {
   const hashtags = getHashtags();
-  const ishasErrorSymbols = hashtags.every((item) =>
+  return hashtags.every((item) =>
     (item == '#') ? true : /^#[a-zа-яё0-9]{1,19}$/i.test(item)
   );
-  console.log(ishasErrorSymbols);
-  return ishasErrorSymbols;
 }
 
 pristine.addValidator(hashtagsInput, checkLengthHashtags, 'Длина хештега должна быть не больше 20');
@@ -74,15 +79,18 @@ pristine.addValidator(hashtagsInput, isRepeatHashtag, 'Хештеги не мо�
 pristine.addValidator(hashtagsInput, checkCountHashtags, 'Количество хештегов не больше 5');
 pristine.addValidator(hashtagsInput, checkSymbolsHashtags, 'Хештеги не должны содержать спецсимволов');
 
-function isValidUserComment() {
+// Валидация формы и запрет на отправку в случае ошибок
+function isValidUserForm(evt) {
   const isValid = pristine.validate();
+  const hashtags = getHashtags();
   if (isValid) {
     console.log('Форма должна быть отправлена, т.к. ошибок нет');
+    hashtagsInput.value = hashtags;
+    console.log(hashtagsInput.value);
   } else {
+    evt.preventDefault();
     console.log('Форма не может быть отправлена, т.к. ошибки есть');
   }
 }
 
-hashtagsInput.addEventListener('input', checkLengthHashtags);
-
-export { userForm, isValidUserComment };
+export { userForm, isValidUserForm };

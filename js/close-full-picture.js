@@ -1,5 +1,5 @@
 import { fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture } from './render-full-picture.js';
-import { isEscapeKey, isEnterKey } from './util.js';
+import { isEscapeKey} from './util.js';
 import { clearComments } from './show-comments.js';
 import { clearUserLike } from './add-user-like.js';
 
