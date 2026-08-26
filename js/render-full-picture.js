@@ -1,4 +1,4 @@
-import { getArrayDataPhotos } from './mock.js';
+import { dataTrumbnails } from './mock.js';
 import { pictures } from './render-trumbnails.js';
 import { openCommentsFullPicture } from './drawing-comments.js';
 import { closeFullPictureClick, closeFullPictureEscape } from './close-full-picture.js';
@@ -29,14 +29,14 @@ function getChoosedTrumbnail() {
 }
 
 // Событие произошло на миниатюре или нет?
-function isChoosedTrumbnail (openedTrumbnail) {
+function isChoosedTrumbnail(openedTrumbnail) {
   let currentTrumblail;
-  document.querySelectorAll('.picture__img').forEach((value)=> {
+  document.querySelectorAll('.picture__img').forEach((value) => {
     if (openedTrumbnail == value) {
       currentTrumblail = value;
     }
   });
-  if(currentTrumblail == undefined) {
+  if (currentTrumblail == undefined) {
     return true;
   } else {
     return false;
@@ -46,12 +46,12 @@ function isChoosedTrumbnail (openedTrumbnail) {
 function openFullPicture(evt) {
   const picture = evt.target;
   // console.log('Выбрана миниатюра'); // ! Срабатывает  обработчик
-  if(isChoosedTrumbnail(picture)) {
+  if (isChoosedTrumbnail(picture)) {
     return null;
   }
   let currentPicture;
   // Записываем в currentPicture 1 из созданных объектов mock
-  getArrayDataPhotos.forEach((value) => {
+  dataTrumbnails.forEach((value) => {
     if (picture.src.includes(value.url)) {
       currentPicture = value;
       return value;
@@ -87,7 +87,7 @@ function openFullPicture(evt) {
   pictures.removeEventListener('click', openFullPicture);
 }
 
-if(document.querySelector('.img-upload__overlay').matches('.hidden')) {
+if (document.querySelector('.img-upload__overlay').matches('.hidden')) {
   pictures.addEventListener('click', openFullPicture);
 }
 

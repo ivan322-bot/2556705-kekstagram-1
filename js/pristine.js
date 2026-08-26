@@ -14,7 +14,7 @@ function getHashtags () {
   const hashtags = [];
   rawHashtags.forEach(value => {
     if (value !== '') {
-      hashtags.push(value);
+      hashtags.push(value.toLowerCase());
     }
   }
   );
@@ -29,13 +29,50 @@ function checkLengthHashtags() {
 
 function isReallyHashtag() {
   const hashtags = getHashtags();
-  const itIsReallyHashtag = hashtags.every(value => (value.startsWith('#')) ? true : false);
-  // console.log(hashtags);
-  return itIsReallyHashtag;
+  const isHashtag = hashtags.every(value => (value.startsWith('#')) ? true : false);
+  return isHashtag;
+}
+
+function hasOneSymbolHastag () {
+  const hashtags = getHashtags();
+  const isOneSymbol = hashtags.every(value => (value.startsWith('#') && value.endsWith('#')) ? false : true);
+  return isOneSymbol;
+}
+
+function isRepeatHashtag () {
+  const hashtags = getHashtags();
+  const newArrayHashtags = [];
+  const hasRepeatHashtag = hashtags.every(value => {
+    if (newArrayHashtags.includes(value)) {
+      return false;
+    } else {
+      newArrayHashtags.push(value);
+      return true;
+    }
+  });
+  return hasRepeatHashtag;
+}
+
+function checkCountHashtags () {
+  const hashtags = getHashtags();
+  return hashtags.length <= 5;
+}
+
+function checkSymbolsHashtags () {
+  const hashtags = getHashtags();
+  const ishasErrorSymbols = hashtags.every((item) =>
+    (item == '#') ? true : /^#[a-zа-яё0-9]{1,19}$/i.test(item)
+  );
+  console.log(ishasErrorSymbols);
+  return ishasErrorSymbols;
 }
 
 pristine.addValidator(hashtagsInput, checkLengthHashtags, 'Длина хештега должна быть не больше 20');
 pristine.addValidator(hashtagsInput, isReallyHashtag, 'Хештег должен начинаться со знака #');
+pristine.addValidator(hashtagsInput, hasOneSymbolHastag, 'Хештег не может состоять только из одной #');
+pristine.addValidator(hashtagsInput, isRepeatHashtag, 'Хештеги не могут повторяться');
+pristine.addValidator(hashtagsInput, checkCountHashtags, 'Количество хештегов не больше 5');
+pristine.addValidator(hashtagsInput, checkSymbolsHashtags, 'Хештеги не должны содержать спецсимволов');
 
 function isValidUserComment() {
   const isValid = pristine.validate();
