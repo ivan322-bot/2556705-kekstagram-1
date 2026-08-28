@@ -1,5 +1,5 @@
 import { fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture } from './render-full-picture.js';
-import { isEscapeKey, isEnterKey } from './util.js';
+import { isEscapeKey} from './util.js';
 import { clearComments } from './show-comments.js';
 import { clearUserLike } from './add-user-like.js';
 
@@ -18,12 +18,7 @@ function closeFullPictureClick() {
 }
 
 function closeFullPictureEscape(evt) {
-  // if (isEnterKey(evt)) {
-  //   evt.preventDefault();
-  //   return null;
-  // }
   if (isEscapeKey(evt)) {
-    // evt.preventDefault();
     closeFullPicture();
     document.removeEventListener('keydown', closeFullPictureEscape);
     buttonCloseFullPicture.removeEventListener('click', closeFullPictureClick);

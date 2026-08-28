@@ -1,4 +1,4 @@
-import { getArrayDataPhotos } from './mock';
+import { dataTrumbnails } from './mock';
 
 const pictures = document.querySelector('.pictures');
 const photosFragment = document.createDocumentFragment();
@@ -9,7 +9,7 @@ const templapePictureComments = templapePicture.querySelector('.picture__comment
 const templapePictureLikes = templapePicture.querySelector('.picture__likes');
 
 // Создаем фрагмент куда помещаем все миниатюры
-getArrayDataPhotos.forEach((value)=> {
+dataTrumbnails.forEach((value) => {
   templapePictureImg.src = value.url;
   templapePictureImg.alt = value.description;
   templapePictureLikes.textContent = value.likes;
@@ -21,4 +21,4 @@ getArrayDataPhotos.forEach((value)=> {
 // Отрисовываем все миниатюры
 pictures.appendChild(photosFragment);
 
-export {pictures};
+export { pictures };
