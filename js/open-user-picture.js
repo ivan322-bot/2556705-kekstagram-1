@@ -1,7 +1,7 @@
 import { isEscapeKey } from './util';
 import { userForm, isValidUserForm, hashtagsInput, userComment } from './pristine.js';
 import { scaleInput } from './user-picture-scaling.js';
-import './user-picture-effects.js';
+import {sliderElement} from './user-picture-effects.js';
 
 const uploadUserPicrureInput = document.querySelector('.img-upload__input');
 const userPictureOverLay = document.querySelector('.img-upload__overlay');
@@ -31,6 +31,9 @@ function closeUserPicture () {
   userComment.value = '';
   scaleInput.value = '100%';
   userPictureImg.style.scale = '1';
+  sliderElement.noUiSlider.updateOptions({
+    start: 0,
+  });
   document.querySelector('#effect-none').checked = true;
   if(document.querySelector('.pristine-error') !== null) {
     document.querySelector('.pristine-error').textContent = '';

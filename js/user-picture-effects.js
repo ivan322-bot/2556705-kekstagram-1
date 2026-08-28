@@ -161,3 +161,5 @@ function changeEffectPicture (evt) {
 }
 
 effectsList.addEventListener('click', changeEffectPicture);
+
+export {sliderElement};
