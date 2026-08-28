@@ -1,5 +1,6 @@
 const userForm = document.querySelector('.img-upload__form');
 const hashtagsInput = document.querySelector('.text__hashtags');
+const userComment = document.querySelector('.text__description');
 
 const pristine = new Pristine(userForm, {
   classTo: 'img-upload__field-wrapper',
@@ -72,12 +73,17 @@ function checkSymbolsHashtags() {
   );
 }
 
+function checkLengthUserComment () {
+  return userComment.value.length <= 140;
+}
+
 pristine.addValidator(hashtagsInput, checkLengthHashtags, 'Длина хештега должна быть не больше 20');
 pristine.addValidator(hashtagsInput, isReallyHashtag, 'Хештег должен начинаться со знака #');
 pristine.addValidator(hashtagsInput, hasOneSymbolHastag, 'Хештег не может состоять только из одной #');
 pristine.addValidator(hashtagsInput, isRepeatHashtag, 'Хештеги не могут повторяться');
 pristine.addValidator(hashtagsInput, checkCountHashtags, 'Количество хештегов не больше 5');
 pristine.addValidator(hashtagsInput, checkSymbolsHashtags, 'Хештеги не должны содержать спецсимволов');
+pristine.addValidator(userComment, checkLengthUserComment, 'Длина комментария не больше 140 символов');
 
 // Валидация формы и запрет на отправку в случае ошибок
 function isValidUserForm(evt) {
@@ -93,4 +99,4 @@ function isValidUserForm(evt) {
   }
 }
 
-export { userForm, isValidUserForm };
+export { userForm, isValidUserForm, hashtagsInput, userComment };

@@ -1,5 +1,7 @@
 import { isEscapeKey } from './util';
-import { userForm, isValidUserForm } from './pristine.js';
+import { userForm, isValidUserForm, hashtagsInput, userComment } from './pristine.js';
+import { scaleInput } from './user-picture-scaling.js';
+import './user-picture-effects.js';
 
 const uploadUserPicrureInput = document.querySelector('.img-upload__input');
 const userPictureOverLay = document.querySelector('.img-upload__overlay');
@@ -23,24 +25,36 @@ function openUserPicture(evt) {
   userForm.addEventListener('submit', isValidUserForm);
 }
 
+function closeUserPicture () {
+  uploadUserPicrureInput.value = '';
+  hashtagsInput.value = '';
+  userComment.value = '';
+  scaleInput.value = '100%';
+  userPictureImg.style.scale = '1';
+  document.querySelector('#effect-none').checked = true;
+  if(document.querySelector('.pristine-error') !== null) {
+    document.querySelector('.pristine-error').textContent = '';
+  }
+  uploadUserPicrureInput.addEventListener('change', openUserPicture);
+  userPictureOverLay.classList.add('hidden');
+}
+
 // Закрываем форму отправки user img
 function closeUserPictureClick() {
-  uploadUserPicrureInput.value = '';
-  userPictureOverLay.classList.add('hidden');
+  closeUserPicture();
   btnCloseUserPicture.removeEventListener('click', closeUserPictureClick);
-  uploadUserPicrureInput.addEventListener('change', openUserPicture);
 }
 
 // Закрываем форму отправки user img
 function closeUserPictureBtn(evt) {
-  // Проверяем нажата ли клавиша Esc и открыта ли форма отправки user img
+  // Проверяем нажата ли клавиша Esc, открыта ли форма отправки user img и находятся ли в фокусе поле с Хештегами и с сообщением от пользователя
   if (isEscapeKey(evt) && !userPictureOverLay.matches('.hidden') && !evt.target.classList.contains('text__hashtags') && !evt.target.classList.contains('text__description')) {
-    closeUserPictureClick();
+    closeUserPicture();
     document.removeEventListener('keydown', closeUserPictureBtn);
-    uploadUserPicrureInput.addEventListener('change', openUserPicture);
   }
 }
 
 uploadUserPicrureInput.addEventListener('change', openUserPicture);
 
+export {userPictureImg};
 

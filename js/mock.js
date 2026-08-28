@@ -25,6 +25,5 @@ function getDataPhoto() {
 }
 
 const dataTrumbnails = Array.from({ length: COUNT_PHOTOS }, getDataPhoto);
-console.log(dataTrumbnails);
 
 export { dataTrumbnails };
