@@ -1,3 +1,5 @@
+import { sendData} from './api.js';
+
 const userForm = document.querySelector('.img-upload__form');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const userComment = document.querySelector('.text__description');
@@ -85,18 +87,20 @@ pristine.addValidator(hashtagsInput, checkCountHashtags, 'Количество �
 pristine.addValidator(hashtagsInput, checkSymbolsHashtags, 'Хештеги не должны содержать спецсимволов');
 pristine.addValidator(userComment, checkLengthUserComment, 'Длина комментария не больше 140 символов');
 
-// Валидация формы и запрет на отправку в случае ошибок
-function isValidUserForm(evt) {
+// Валидация формы и запрет на отправку в случае ошибок + собираем данные формы для отправки на сервер
+const isValidUserForm = async (evt) => {
   const isValid = pristine.validate();
   const hashtags = getHashtags();
   if (isValid) {
+    evt.preventDefault();
     console.log('Форма должна быть отправлена, т.к. ошибок нет');
     hashtagsInput.value = hashtags;
+    await sendData(new FormData(evt.target));
     console.log(hashtagsInput.value);
   } else {
     evt.preventDefault();
     console.log('Форма не может быть отправлена, т.к. ошибки есть');
   }
-}
+};
 
 export { userForm, isValidUserForm, hashtagsInput, userComment };
