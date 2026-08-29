@@ -5,11 +5,11 @@ const userImg = document.querySelector('.social__footer').querySelector('.social
 const userMessage = document.querySelector('.social__footer-text');
 
 // Чтобы написанный пользователем текст не забеагл на кнопку отправки сообщения
-function repairUserComment () {
+function repairUserComment() {
   userMessage.style.paddingRight = '38px';
 }
 
-function addUserComment () {
+function addUserComment() {
   const socialComent = document.querySelector('.social__comment').cloneNode(true);
   const socialImg = socialComent.querySelector('.social__picture');
   const socialText = socialComent.querySelector('.social__text');
@@ -24,4 +24,4 @@ function addUserComment () {
   userMessage.value = '';
 }
 
-export {repairUserComment, addUserComment};
+export { repairUserComment, addUserComment };

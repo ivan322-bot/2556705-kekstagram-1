@@ -1,6 +1,6 @@
 import { fullPictureCommentsFragment, fullPictureComments } from './drawing-comments.js';
 import { repairUserComment, addUserComment } from './user-comment.js';
-import { fullPictureLikes } from './render-full-picture.js';
+import { fullPictureLikes } from '../full-picture/render-full-picture.js';
 
 const fullPictureCommentsLoader = document.querySelector('.comments-loader');
 const fullPictureCommentCount = document.querySelector('.social__comment-count');

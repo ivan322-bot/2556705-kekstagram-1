@@ -1,4 +1,4 @@
 import './render-trumbnails.js';
-import './render-full-picture.js';
-import './open-user-picture.js';
+import './full-picture/render-full-picture.js';
+import './user-picture/open-user-picture.js';
 

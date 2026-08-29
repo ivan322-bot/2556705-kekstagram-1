@@ -1,7 +1,7 @@
 import { fullPicture, body, pictures, buttonCloseFullPicture, openFullPicture } from './render-full-picture.js';
-import { isEscapeKey} from './util.js';
-import { clearComments } from './show-comments.js';
-import { clearUserLike } from './add-user-like.js';
+import { isEscapeKey } from '../util.js';
+import { clearComments } from '../comments/show-comments.js';
+import { clearUserLike } from '../comments/add-user-like.js';
 
 function closeFullPicture() {
   clearComments();

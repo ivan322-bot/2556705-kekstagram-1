@@ -1,9 +1,9 @@
-import { dataTrumbnails } from './mock.js';
-import { pictures } from './render-trumbnails.js';
-import { openCommentsFullPicture } from './drawing-comments.js';
+import { dataTrumbnails } from '../mock.js';
+import { pictures } from '../render-trumbnails.js';
+import { openCommentsFullPicture } from '../comments/drawing-comments.js';
 import { closeFullPictureClick, closeFullPictureEscape } from './close-full-picture.js';
-import { changeUserLike, addLikeImg } from './add-user-like.js';
-import { changeMultiDigitalNumber } from './util.js';
+import { changeUserLike, addLikeImg } from '../comments/add-user-like.js';
+import { changeMultiDigitalNumber } from '../util.js';
 
 const buttonCloseFullPicture = document.querySelector('.big-picture__cancel');
 const body = document.body;
