@@ -32,6 +32,41 @@ if (dataTrumbnails != undefined) {
   filtersFormSection.classList.remove('img-filters--inactive');
 }
 
+function debounce (foo) {
+  let timeoutId;
+  let oldValue;
+  let newValue;
+  return (evt) => {
+    // clearTimeout(timeoutId);
+    console.log(timeoutId);
+    console.log(oldValue);
+    console.log(newValue);
+    console.log((newValue - oldValue) < 1000);
+    if(newValue == undefined || newValue == 0) {
+      newValue = new Date();
+      timeoutId = setTimeout(() =>
+        foo(evt), 1000);
+      console.log('Повысили значение счетчика');
+      console.log(timeoutId);
+      return null;
+    }
+    oldValue = newValue;
+    newValue = new Date();
+    if((newValue - oldValue) < 1000) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() =>
+        foo(evt)
+      , 1000);
+    } else {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() =>
+        foo(evt), 1000);
+    }
+  };
+}
+
+const debounceTwo = debounce(changeFilterTrumbnails);
+
 // Изменение миниатюр при смене фильтра
 function changeFilterTrumbnails (evt) {
   // При клике на фильтр удаляем все миниатюры, чтобы создать новые
@@ -53,19 +88,17 @@ function changeFilterTrumbnails (evt) {
   }
   if (evt.target.id == 'filter-random') {
     console.log('Случайные миниатюры');
-    // const newDataTrumbnails = Array.from({ length: 10}, newDataTrumbnail);
-    // console.log(newDataTrumbnails);
     renderTrumbnails(getUniqueValueArray(dataTrumbnails, 10));
   }
   if (evt.target.id == 'filter-discussed') {
     console.log('Обсуждаемые миниатюры');
-    const newDataTrumbnails = dataTrumbnails.slice().reverse();
+    const newDataTrumbnails = dataTrumbnails.slice().sort((a,b)=> b.comments.length - a.comments.length);
     renderTrumbnails(newDataTrumbnails);
   }
 }
 
 // Отрисовывает все миниаьюры по умолчанию и добавляем обработчтик события на фильтры для миниатюр
 
-filtersForm.addEventListener('click', changeFilterTrumbnails);
+filtersForm.addEventListener('click', debounceTwo);
 
 export { pictures };
