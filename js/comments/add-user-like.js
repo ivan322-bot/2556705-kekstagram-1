@@ -1,6 +1,6 @@
 // Импортируем эл-нт с одбщим счетчиком лайков
-import { fullPictureLikes, getChoosedTrumbnail } from './render-full-picture.js';
-import { changeMultiDigitalNumber } from './util.js';
+import { fullPictureLikes, getChoosedTrumbnail } from '../full-picture/render-full-picture.js';
+import { changeMultiDigitalNumber } from '../util.js';
 
 const socialLikes = document.querySelector('.social__likes');
 let likesCountNumber;

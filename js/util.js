@@ -27,6 +27,18 @@ function getUniqueInteger (min, max) {
   };
 }
 
+function getUniqueValueArray (valuesArray, count) {
+  const previosValues = [];
+  let currentValue = valuesArray[getRandomInteger(0, valuesArray.length - 1)];
+  while (previosValues.length <= count) {
+    while (previosValues.includes(currentValue)) {
+      currentValue = valuesArray[getRandomInteger(0, valuesArray.length - 1)];
+    }
+    previosValues.push(currentValue);
+  }
+  return previosValues;
+}
+
 const isEscapeKey = (event) => event.key === 'Escape';
 const isEnterKey = (event) => event.key === 'Enter';
 
@@ -47,5 +59,5 @@ function isNumber (element) {
   return Number.isNaN(Number(element.textContent)) == false;
 }
 
-export {getRandomInteger, getRandomValueArray, getUniqueInteger, isEscapeKey, isEnterKey, changeMultiDigitalNumber};
+export {getRandomInteger, getRandomValueArray, getUniqueValueArray, getUniqueInteger, isEscapeKey, isEnterKey, changeMultiDigitalNumber};
 
